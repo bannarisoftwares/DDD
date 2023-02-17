@@ -52,7 +52,19 @@ public class Tests
         var cart2 = new Cart();
         Assert.IsEmpty(cart2.Products);
         cart2.AddProduct(product, 2);
-        
+
         Assert.AreNotEqual(cart1, cart2);
+    }
+    
+    [Test]
+    public void ShouldAddProductsToTheCartWithPrice()
+    {
+        var cart = new Cart();
+        Assert.IsEmpty(cart.Products);
+        cart.AddProduct(new Product("Apple pencil", new Price(2, CurrencyType.USD)));
+    
+        
+        Assert.AreEqual(CurrencyType.USD, cart.Products.First().Price.CurrencyType);
+        Assert.AreEqual(2, cart.Products.First().Price.Amount);
     }
 }
