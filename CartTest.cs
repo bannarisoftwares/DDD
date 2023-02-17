@@ -55,16 +55,54 @@ public class Tests
 
         Assert.AreNotEqual(cart1, cart2);
     }
-    
+
     [Test]
     public void ShouldAddProductsToTheCartWithPrice()
     {
         var cart = new Cart();
         Assert.IsEmpty(cart.Products);
         cart.AddProduct(new Product("Apple pencil", new Price(2, CurrencyType.USD)));
-    
-        
+
+
         Assert.AreEqual(CurrencyType.USD, cart.Products.First().Price.CurrencyType);
         Assert.AreEqual(2, cart.Products.First().Price.Amount);
+    }
+
+    [Test]
+    public void ShouldAddProductsToTheCartWithPricee()
+    {
+        var productName = "Apple pencil";
+        var originalPrice = 125;
+        var discount = new Discount(new Dictionary<string, Price>()
+        {
+            {productName, new Price(originalPrice, CurrencyType.USD)}
+        });
+
+        var discountedPrice = originalPrice - (discount.CompetitorPrice[productName].Amount * 10) / 100;
+
+        var cart = new Cart();
+        Assert.IsEmpty(cart.Products);
+        cart.AddProduct(new Product(productName, new Price(discountedPrice, CurrencyType.USD)));
+
+
+        Assert.AreEqual(CurrencyType.USD, cart.Products.First().Price.CurrencyType);
+        Assert.AreEqual(2, cart.Products.First().Price.Amount);
+    }
+    
+    [Test]
+    public void ShouldCreateOrderFromTheCart()
+    {
+        var productName = "Apple pencil";
+        
+        var cart = new Cart();
+        Assert.IsEmpty(cart.Products);
+        cart.AddProduct(new Product(productName, new Price(2, CurrencyType.USD)));
+        cart.AddProduct(new Product(productName, new Price(2, CurrencyType.USD)));
+
+        Order order = new Order(cart.Products);
+        cart.UpdateCheckedOutStatus(true);
+
+
+        Assert.AreEqual(2, order.Products.Count);
     }
 }
