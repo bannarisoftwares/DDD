@@ -1,6 +1,6 @@
 namespace DDDWorkshop;
 
-public class Pencil : IProduct
+public class Pencil : Apple
 {
-    public string ProductName { get; set; }
+    
 }

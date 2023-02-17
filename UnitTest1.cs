@@ -8,11 +8,11 @@ public class Tests
     }
 
     [Test]
-    public void Test1()
+    public void ShouldAddProductToTheCart()
     {
         var cart = new Cart();
-        cart.AddProduct(new Apple());
+        Assert.IsEmpty(cart.Products);
         cart.AddProduct(new Pencil());
-        Assert.Pass();
+        Assert.AreEqual(1,cart.Products.Count);
     }
 }
