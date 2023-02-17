@@ -8,11 +8,21 @@ public class Tests
     }
 
     [Test]
-    public void ShouldAddProductToTheCart()
+    public void ShouldAddProductsToTheCart()
     {
         var cart = new Cart();
         Assert.IsEmpty(cart.Products);
-        cart.AddProduct(new Pencil());
-        Assert.AreEqual(1,cart.Products.Count);
+        cart.AddProduct(new Product("Apple pencil"));
+        cart.AddProduct(new Product("Sony Wireless headphone"));
+        Assert.AreEqual(2,cart.Products.Count);
+    }
+    
+    [Test]
+    public void ShouldAddProductsWithQuantityInToTheCart()
+    {
+        var cart = new Cart();
+        Assert.IsEmpty(cart.Products);
+        cart.AddProduct(new Product("Apple pencil"),2);
+        Assert.AreEqual(2,cart.Products.Count);
     }
 }

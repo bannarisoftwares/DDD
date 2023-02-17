@@ -4,13 +4,22 @@ public class Cart
 {
     public Cart()
     {
-        Products = new List<IProduct>();
+        Products = new List<Product>();
     }
 
-    public IList<IProduct> Products { set; get; }
+    public IList<Product> Products { set; get; }
 
-    public void AddProduct(IProduct product)
+    public void AddProduct(Product product)
     {
         Products.Add(product);
+    }
+    
+    public void AddProduct(Product product, int quantity)
+    {
+        for (var i = 0; i < quantity; i++)
+        {
+            Products.Add(product);
+            
+        }
     }
 }
