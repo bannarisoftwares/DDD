@@ -7,7 +7,7 @@ public class Cart
         Products = new List<Product>();
     }
 
-    public IList<Product> Products { set; get; }
+    public List<Product> Products { set; get; }
 
     public void AddProduct(Product product)
     {
@@ -24,14 +24,14 @@ public class Cart
 
     public void RemoveProduct(Product product)
     {
-        Products = Products.Where(pro => !pro.Name.Equals(product.Name)).ToList();
-        
+        Products.RemoveAll(p => p.Name.Equals(product.Name));
+
     } 
     public IList<string> RemoveProducts(IList<Product> product)
     {
         // Products = Products.Where(pro => !pro.Name.Equals(product.Name)).ToList();
-        
-       return product.Select(product => product.Name).ToList();
+
+        return product.Select(product => product.Name).ToList();
     }
 
 }
