@@ -6,6 +6,5 @@ public class Product
     {
         Name = name;
     }
-
     public string Name { set; get; }
 }
